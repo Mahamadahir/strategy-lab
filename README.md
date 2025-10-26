@@ -6,6 +6,7 @@ Modular experimentation environment for generating, backtesting, and improving t
 - Provide an end-to-end research-to-production workflow that transforms raw market data into actionable stock predictions.
 - Maintain a modular architecture so data ingestion, feature engineering, modeling, and monitoring can evolve independently.
 - Ship a reliable predictor that can be scheduled, audited, and continuously improved through the Strategy Lab toolchain.
+- Guarantee every feature is backed by automated tests (unit, integration, and regression) before promotion.
 
 ## Current Modules
 - `strategies/` - randomisable building blocks (MA crossover, RSI mean reversion, MACD) plus mutation utilities.
@@ -63,6 +64,15 @@ strategy-lab/
 
 ## Feature Implementation Checklist
 <details>
+<summary><strong>Infrastructure & Tooling</strong></summary>
+
+- [ ] Containerize the Strategy Lab and predictor stack with Docker (base image plus dev overrides).
+- [ ] Provision CI that runs linting, tests, and build checks on every change.
+- [ ] Document Docker workflows and testing commands in developer onboarding materials.
+
+</details>
+
+<details>
 <summary><strong>Data Foundations</strong></summary>
 
 - [ ] Implement `DataIngestor.fetch_price_history`
@@ -70,6 +80,7 @@ strategy-lab/
 - [ ] Implement `DataIngestor.fetch_alternative_signals`
 - [ ] Implement `DataIngestor.merge_sources`
 - [ ] Implement `DataIngestor.cache_dataset`
+- [ ] Write ingestion unit and integration tests (mock vs. live vendor coverage).
 
 </details>
 
@@ -80,6 +91,7 @@ strategy-lab/
 - [ ] Implement `FeatureEngineer.generate_targets`
 - [ ] Implement `FeatureEngineer.select_features`
 - [ ] Implement `FeatureEngineer.persist_features`
+- [ ] Add FeatureEngineer tests covering feature matrix output, labelling, and persistence hooks.
 
 </details>
 
@@ -90,6 +102,7 @@ strategy-lab/
 - [ ] Implement `ModelTrainer.train`
 - [ ] Implement `ModelTrainer.evaluate`
 - [ ] Implement `ModelTrainer.save_artifacts`
+- [ ] Create training/evaluation test suite with fixture datasets and metric assertions.
 
 </details>
 
@@ -102,6 +115,7 @@ strategy-lab/
 - [ ] Implement `StockPredictor.load_model`
 - [ ] Implement `StockPredictor.predict`
 - [ ] Implement `StockPredictor.explain`
+- [ ] Add registry and serving tests (artifact loading, prediction correctness, explainability outputs).
 
 </details>
 
@@ -114,6 +128,7 @@ strategy-lab/
 - [ ] Implement `PredictionPipeline.batch_inference`
 - [ ] Implement `PredictionPipeline.evaluate_live_performance`
 - [ ] Implement `PredictionPipeline.schedule_jobs`
+- [ ] Build pipeline integration tests covering end-to-end training and inference flows.
 
 </details>
 
@@ -124,6 +139,7 @@ strategy-lab/
 - [ ] Implement `MonitoringService.detect_drift`
 - [ ] Implement `MonitoringService.trigger_alerts`
 - [ ] Implement `MonitoringService.compile_report`
+- [ ] Implement monitoring tests validating alert thresholds, drift metrics, and reporting outputs.
 
 </details>
 
